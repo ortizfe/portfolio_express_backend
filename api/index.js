@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-// import axios from "axios";
+const axios = require("axios");
 // import dotenv from "dotenv";
 // dotenv.configDotenv();
 
