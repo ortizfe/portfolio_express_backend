@@ -29,7 +29,7 @@ const auth_header = {
 // getting artist by artist ID
 app.get("/artist", async (req, res) => {
   const artist = await axios.get(
-    `https://api.spotify.com/v1/artists/${req.artistID}`,
+    `https://api.spotify.com/v1/artists/1btWGBz4Uu1HozTwb2Lm8A`,
     auth_header
   );
   res.json(artist.data);
@@ -38,7 +38,7 @@ app.get("/artist", async (req, res) => {
 // get artists albums
 app.get("/artist/albums", async (req, res) => {
   const albums = await axios.get(
-    `https://api.spotify.com/v1/artists/${request.artistID}/albums?include_groups=album`,
+    `https://api.spotify.com/v1/artists/1btWGBz4Uu1HozTwb2Lm8A/albums?include_groups=album`,
     auth_header
   );
 
