@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-import axios from "axios";
-import dotenv from "dotenv";
-dotenv.configDotenv();
+// import axios from "axios";
+// import dotenv from "dotenv";
+// dotenv.configDotenv();
 
 // /* Spotify API Calls */
 // const spotify_client_id = import.meta.env.SPOTIFY_CLIENT_ID;
