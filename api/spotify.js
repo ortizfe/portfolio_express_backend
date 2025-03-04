@@ -38,6 +38,7 @@ spotify_router.get("/artist", async (req, res) => {
     const auth_header = {
       headers: {
         Authorization: `Bearer ${access_token}`,
+        "Access-Control-Allow-Origin": ["http://localhost:5173/"],
       },
       timeout: 10000,
     };
