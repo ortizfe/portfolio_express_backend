@@ -1,5 +1,6 @@
 const express = require("express");
 const rateLimit = require("express-rate-limit");
+const cors = require("cors");
 const spotify_router = require("./spotify");
 
 const app = express();
@@ -15,6 +16,7 @@ const spotifyRateLimiter = rateLimit({
 });
 app.use(spotifyRateLimiter);
 app.set("trust proxy", 1);
+app.use(cors());
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
