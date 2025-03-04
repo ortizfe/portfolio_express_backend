@@ -7,7 +7,7 @@ const PORT = 3000;
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
 // /* Spotify API Calls */
-app.use("/spotify", spotify_router);
+// app.use("/spotify", spotify_router);
 
 /* The Movie Database API Calls */
 
