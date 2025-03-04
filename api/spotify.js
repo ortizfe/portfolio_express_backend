@@ -38,7 +38,6 @@ spotify_router.get("/artist", async (req, res) => {
     const auth_header = {
       headers: {
         Authorization: `Bearer ${access_token}`,
-        "Access-Control-Allow-Origin": ["http://localhost:5173/"],
       },
       timeout: 10000,
     };
@@ -47,6 +46,7 @@ spotify_router.get("/artist", async (req, res) => {
       `https://api.spotify.com/v1/artists/1btWGBz4Uu1HozTwb2Lm8A`,
       auth_header
     );
+    res.setHeader("Access-Control-Allow-Origin", ["http://localhost:5173/"]);
     res.json(artist.data);
   } catch (error) {
     console.error("It didn't work");
