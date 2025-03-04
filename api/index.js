@@ -9,7 +9,7 @@ const PORT = 3001;
 // Rate limiter: 20 requests per minute per IP
 const spotifyRateLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  limit: 20, // Max 20 requests per IP
+  limit: 50, // Max 20 requests per IP
   standardHeaders: "draft-8",
   legacyHeaders: false,
   message: "Too many requests, please try again later.",
