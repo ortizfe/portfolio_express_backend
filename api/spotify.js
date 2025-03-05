@@ -31,6 +31,31 @@ async function getAccessToken() {
   }
 }
 
+// searching spotify for albums
+spotify_router.get("/search/albums", async (req, res) => {
+  try {
+    const access_token = await getAccessToken();
+    const auth_header = {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      timeout: 10000,
+    };
+
+    const album = "Flood";
+    const market = "US";
+
+    const search = await axios.get(
+      `https://api.spotify.com/v1/search?q=${album}&type=album&market=${market}&limit=10`,
+      auth_header
+    );
+
+    res.json(search.data.albums.items);
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+  }
+});
+
 // getting artist by artist ID
 spotify_router.get("/artist", async (req, res) => {
   try {
@@ -49,18 +74,31 @@ spotify_router.get("/artist", async (req, res) => {
 
     res.json(artist.data);
   } catch (error) {
-    console.error("It didn't work");
+    console.error(`Error: ${error.message}`);
   }
 });
 
-// // get artists albums
-// spotify_router.get("/albums", async (req, res) => {
-//   const albums = await axios.get(
-//     `https://api.spotify.com/v1/artists/1btWGBz4Uu1HozTwb2Lm8A/albums?include_groups=album`,
-//     auth_header
-//   );
+// get artists albums
+spotify_router.get("/albums", async (req, res) => {
+  try {
+    const access_token = await getAccessToken();
+    const auth_header = {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      timeout: 10000,
+    };
+    const albums = await axios.get(
+      `https://api.spotify.com/v1/artists/1btWGBz4Uu1HozTwb2Lm8A/albums?include_groups=album`,
+      auth_header
+    );
 
-//   res.json(albums.data.items);
-// });
+    res.json(albums.data.items);
+
+    res.json(artist.data);
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+  }
+});
 
 module.exports = spotify_router;
