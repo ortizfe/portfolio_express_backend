@@ -16,7 +16,11 @@ const spotifyRateLimiter = rateLimit({
 });
 app.use(spotifyRateLimiter);
 app.set("trust proxy", 1);
-app.use(cors());
+app.use((req, res, next) => {
+  res.append("Access-Control-Allow-Origin", ["http://localhost:5173"]);
+  res.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.append("Access-Control-Allow-Headers", "Content-Type");
+});
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
 

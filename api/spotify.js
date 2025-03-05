@@ -2,7 +2,6 @@
 const express = require("express");
 const spotify_router = express.Router();
 const axios = require("axios");
-const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.configDotenv();
 
@@ -33,7 +32,7 @@ async function getAccessToken() {
 }
 
 // searching spotify for albums
-spotify_router.get("/search/albums", cors(), async (req, res) => {
+spotify_router.get("/search/albums", async (req, res) => {
   try {
     const access_token = await getAccessToken();
     const auth_header = {
@@ -51,6 +50,7 @@ spotify_router.get("/search/albums", cors(), async (req, res) => {
       auth_header
     );
 
+    res.setHeaders();
     res.json(search.data.albums);
   } catch (error) {
     console.error(`Error: ${error.message}`);
