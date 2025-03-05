@@ -50,7 +50,7 @@ spotify_router.get("/search/albums", async (req, res) => {
       auth_header
     );
 
-    res.json(search.data.albums.items);
+    res.json(search.data.albums);
   } catch (error) {
     console.error(`Error: ${error.message}`);
   }
