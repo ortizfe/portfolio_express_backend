@@ -59,8 +59,36 @@ spotify_router.get("/search/albums", async (req, res) => {
   }
 });
 
+// searching spotify for artists
+spotify_router.get("/search/artists", async (req, res) => {
+  const userArtistArray = req.query.input;
+
+  try {
+    const access_token = await getAccessToken();
+    const auth_header = {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      timeout: 10000,
+    };
+
+    const artist = userArtistArray[0];
+    const market = userArtistArray[1];
+
+    const search = await axios.get(
+      `https://api.spotify.com/v1/search?q=${artist}&type=artist&market=${market}&limit=11`,
+      auth_header
+    );
+
+    res.json(search.data.artists);
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+  }
+});
+
 // getting artist by artist ID
 spotify_router.get("/artist", async (req, res) => {
+  const artist = req.query.input;
   try {
     const access_token = await getAccessToken();
     const auth_header = {
@@ -71,7 +99,7 @@ spotify_router.get("/artist", async (req, res) => {
     };
 
     const artist = await axios.get(
-      `https://api.spotify.com/v1/artists/1btWGBz4Uu1HozTwb2Lm8A`,
+      `https://api.spotify.com/v1/artists/${artist}`,
       auth_header
     );
 
