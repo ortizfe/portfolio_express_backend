@@ -17,11 +17,11 @@ const spotifyRateLimiter = rateLimit({
 app.use(spotifyRateLimiter);
 app.set("trust proxy", 1);
 app.use((req, res, next) => {
-  // res.setHeader(
-  //   "Access-Control-Allow-Origin",
-  //   "https://federico-portfolio-chi.vercel.app"
-  // );
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://federico-portfolio-chi.vercel.app"
+  );
+  // res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
   res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
   res.setHeader(
     "Access-Control-Allow-Headers",
