@@ -12,6 +12,7 @@ const access_token_header = {
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
   },
+  timeout: 10000,
 };
 
 async function getAccessToken() {
@@ -33,6 +34,8 @@ async function getAccessToken() {
 
 // searching spotify for albums
 spotify_router.get("/search/albums", async (req, res) => {
+  const userAlbumArray = req.query.input;
+
   try {
     const access_token = await getAccessToken();
     const auth_header = {
@@ -42,8 +45,8 @@ spotify_router.get("/search/albums", async (req, res) => {
       timeout: 10000,
     };
 
-    const album = "Flood";
-    const market = "US";
+    const album = userAlbumArray[0];
+    const market = userAlbumArray[1];
 
     const search = await axios.get(
       `https://api.spotify.com/v1/search?q=${album}&type=album&market=${market}&limit=12`,
@@ -94,8 +97,6 @@ spotify_router.get("/albums", async (req, res) => {
     );
 
     res.json(albums.data.items);
-
-    res.json(artist.data);
   } catch (error) {
     console.error(`Error: ${error.message}`);
   }

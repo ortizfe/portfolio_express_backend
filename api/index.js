@@ -4,7 +4,7 @@ const cors = require("cors");
 const spotify_router = require("./spotify");
 
 const app = express();
-const PORT = 3000;
+const PORT = 3002;
 
 // Rate limiter: 20 requests per minute per IP
 const spotifyRateLimiter = rateLimit({
@@ -17,16 +17,26 @@ const spotifyRateLimiter = rateLimit({
 app.use(spotifyRateLimiter);
 app.set("trust proxy", 1);
 app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://federico-portfolio-chi.vercel.app"
-  );
+  // res.setHeader(
+  //   "Access-Control-Allow-Origin",
+  //   "https://federico-portfolio-chi.vercel.app"
+  // );
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
   res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Content-Type",
     "Authorization"
   );
+  next();
+});
+
+/* Set timeout for requests */
+app.use(function (req, res, next) {
+  req.setTimeout(20000, function () {
+    console.log("Request has timed out.");
+    res.send(408);
+  });
   next();
 });
 
