@@ -46,7 +46,7 @@ spotify_router.get("/search/albums", async (req, res) => {
     const market = "US";
 
     const search = await axios.get(
-      `https://api.spotify.com/v1/search?q=${album}&type=album&market=${market}&limit=10`,
+      `https://api.spotify.com/v1/search?q=${album}&type=album&market=${market}&limit=12`,
       auth_header
     );
 
