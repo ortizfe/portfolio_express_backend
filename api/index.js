@@ -19,7 +19,7 @@ app.set("trust proxy", 1);
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://federico-portfolio-chi.vercel.app/"
+    "https://federico-portfolio-chi.vercel.app"
   );
   res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
   res.setHeader(
