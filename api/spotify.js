@@ -49,7 +49,7 @@ spotify_router.get("/search/albums", async (req, res) => {
     const market = userAlbumArray[1];
 
     const search = await axios.get(
-      `https://api.spotify.com/v1/search?q=${album}&type=album&market=${market}&limit=12`,
+      `https://api.spotify.com/v1/search?q=${album}&type=album&market=${market}&limit=30`,
       auth_header
     );
 
@@ -88,7 +88,8 @@ spotify_router.get("/search/artists", async (req, res) => {
 
 // getting artist by artist ID
 spotify_router.get("/artist", async (req, res) => {
-  const artist = req.query.input;
+  const id = req.query.input;
+  // const id = "1btWGBz4Uu1HozTwb2Lm8A";
   try {
     const access_token = await getAccessToken();
     const auth_header = {
@@ -99,7 +100,7 @@ spotify_router.get("/artist", async (req, res) => {
     };
 
     const artist = await axios.get(
-      `https://api.spotify.com/v1/artists/${artist}`,
+      `https://api.spotify.com/v1/artists/${id}`,
       auth_header
     );
 
@@ -109,8 +110,11 @@ spotify_router.get("/artist", async (req, res) => {
   }
 });
 
-// get artists albums
+// get an artists albums
 spotify_router.get("/albums", async (req, res) => {
+  const id = req.query.input;
+  // const id = "1btWGBz4Uu1HozTwb2Lm8A";
+
   try {
     const access_token = await getAccessToken();
     const auth_header = {
@@ -120,7 +124,7 @@ spotify_router.get("/albums", async (req, res) => {
       timeout: 10000,
     };
     const albums = await axios.get(
-      `https://api.spotify.com/v1/artists/1btWGBz4Uu1HozTwb2Lm8A/albums?include_groups=album`,
+      `https://api.spotify.com/v1/artists/${id}/albums?include_groups=album&limit=6`,
       auth_header
     );
 
