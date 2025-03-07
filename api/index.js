@@ -4,7 +4,7 @@ const cors = require("cors");
 const spotify_router = require("./spotify");
 
 const app = express();
-const PORT = 3002;
+const PORT = 3000;
 
 // Rate limiter: 20 requests per minute per IP
 const spotifyRateLimiter = rateLimit({
