@@ -4,12 +4,12 @@ const spotify_router = express.Router();
 const axios = require("axios");
 const dotenv = require("dotenv");
 dotenv.configDotenv();
-const queryString = require("querystring");
+// const queryString = require("querystring");
 
 const spotify_client_id = process.env.SPOTIFY_CLIENT_ID;
 const spotify_client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 
-const redirect_uri = "http://localhost:3000/spotify/callback";
+// const redirect_uri = "http://localhost:3000/spotify/callback";
 // const redirect_uri = "https://express-backend-api-one.vercel.app/spotify/callback";
 
 const express_access_token_header = {

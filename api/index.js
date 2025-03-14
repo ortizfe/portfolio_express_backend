@@ -2,6 +2,7 @@ const express = require("express");
 const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 const spotify_router = require("./spotify");
+const tmdb_router = require("./tmdb");
 
 const app = express();
 const PORT = 3006;
@@ -17,11 +18,11 @@ const spotifyRateLimiter = rateLimit({
 app.use(spotifyRateLimiter);
 app.set("trust proxy", 1);
 app.use((req, res, next) => {
-  // res.setHeader(
-  //   "Access-Control-Allow-Origin",
-  //   "https://federico-portfolio-chi.vercel.app"
-  // );
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://federico-portfolio-chi.vercel.app"
+  );
+  // res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
   res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -46,6 +47,7 @@ app.get("/", (req, res) => res.send("Express on Vercel"));
 app.use("/spotify", spotify_router);
 
 /* The Movie Database API Calls */
+app.use("/tmdb", tmdb_router);
 
 /* Market Stack API Calls */
 
